@@ -5,6 +5,7 @@ import os
 from PIL import Image
 import numpy as np
 import TXTtoBits
+import encodeInBMP
 
 parser = argparse.ArgumentParser()
 
@@ -36,13 +37,29 @@ if not(os.path.exists(args.file), os.path.exists(args.output), os.path.exists(ar
 if args.verbose:
     print('Ouverture des fichiers...\n')
 
-img = np.array(Image.open(JPGtoBMP.convertToBMP(args.file)))
+imgArray = np.array(Image.open(JPGtoBMP.convertToBMP(args.file)))
 output = args.output
 text = open(args.text, 'r')
 
 if args.verbose:
     print('Conversion du texte en binaire...\n')
 
-listBITS = TXTtoBits.convertToBits(text)
+bitText = TXTtoBits.convertToBits(text)
+
+if args.verbose:
+    print("Encodage du message dans l'image...\n")
+
+imgArray = encodeInBMP.encode(imgArray, bitText)
+
+if args.verbose:
+    print("Sauvegarde de l'image...\n")
+
+img = Image.fromarray(imgArray)
+
+img.save(output)
+
+print("L'image codée a bien été sauvegardée dans le fichier {}".format(output))
+
+sys.exit(0)
 
 
