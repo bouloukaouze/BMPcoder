@@ -4,14 +4,15 @@ import sys
 import os
 from PIL import Image
 import numpy as np
+import TXTtoBits
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-v', "--verbose", help="Mode verbeux",
-                    action="store_true")
 
+parser.add_argument('-v', "--verbose", help="Mode verbeux", action="store_true")
 parser.add_argument('-f', '--file', help="Adresse de l'image à coder", type=str)
 parser.add_argument('-o', '--output', help="Adresse de sortie de l'image codée", type=str)
 parser.add_argument('-t', '--text', help='Adresse du texte à coder', type=str)
+
 args = parser.parse_args()
 
 if (args.file[-4:].lower() != '.jpg' and args.file[-4:].lower() != '.png' and args.file[-4:].lower() != '.bmp'
@@ -32,6 +33,16 @@ if not(os.path.exists(args.file), os.path.exists(args.output), os.path.exists(ar
     print("Erreur : un des fichiers spécifiés n'existe pas.")
     sys.exit(1)
 
-file = np.array(Image.open(JPGtoBMP.convertToBMP(args.file)))
+if args.verbose:
+    print('Ouverture des fichiers...\n')
+
+img = np.array(Image.open(JPGtoBMP.convertToBMP(args.file)))
 output = args.output
 text = open(args.text, 'r')
+
+if args.verbose:
+    print('Conversion du texte en binaire...\n')
+
+listBITS = TXTtoBits.convertToBits(text)
+
+
