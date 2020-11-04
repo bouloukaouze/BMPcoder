@@ -1,3 +1,5 @@
+import codecs
+
 def convertToBits(text):
 
     line = text.readline()
@@ -9,4 +11,10 @@ def convertToBits(text):
         listBITS.append(lineBITS)
         line = text.readline()
     return(listBITS)
+
+def convertToString(bin): #bin est un string du type '0b001011011110'
+
+    hex = hex(int(line[2:], 2)
+    text = codecs.decode(hex, 'hex').decode('utf-8')
+    return(text)
 
