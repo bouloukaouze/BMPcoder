@@ -10,7 +10,7 @@ def convertToBits(text):
         lineBITS = bin(int(lineHEX, 16))[2:]
         listBITS.append(lineBITS)
         line = text.readline()
-    bitText = list('1010'.join(listBITS))
+    bitText = '1010'.join(listBITS)
     return(bitText)
 
 def convertToString(bin): #bin est un string du type '0b001011011110'
