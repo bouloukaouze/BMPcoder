@@ -26,14 +26,16 @@ if args.verbose:
     print("Opening file...\n")
 
 imgArray = np.array(Image.open(args.image))
-print("Dimensions = ", imgArray.shape)
-print("First pixel : ", imgArray[0,0])
 
 if args.verbose:
     print("Extracting message from image...\n")
 
 bintext=imgToText.gettext(imgArray)
-text=-TXTtoBits.convertToString('0b'+bintext)[:-7]
+
+if args.verbose:
+    print("Converting message to clear text...\n")
+    
+text=-TXTtoBits.convertToString('0b'+ bintext)[:-7]
 
 addr_out, message = splitBin.split(text)
 

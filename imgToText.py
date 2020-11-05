@@ -2,8 +2,6 @@ def gettext(img):
     
     """
     Takes image with encoded message and returns binary text
-    
-    PROBLEM : DOES NOT DETECT WORDS ENDFILE NOR ENDTEXT
     """
     
     message=""
