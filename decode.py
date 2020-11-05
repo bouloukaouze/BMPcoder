@@ -31,11 +31,11 @@ if args.verbose:
     print("Extracting message from image...\n")
 
 bintext=imgToText.gettext(imgArray)
-
+print("Bintext = ", bintext[:1000])
 if args.verbose:
     print("Converting message to clear text...\n")
     
-text=-TXTtoBits.convertToString('0b'+ bintext)[:-7]
+text=(TXTtoBits.convertToString('0b'+ bintext))#[:-7]
 
 addr_out, message = splitBin.split(text)
 

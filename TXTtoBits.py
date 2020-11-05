@@ -1,17 +1,18 @@
 import codecs
 
-def convertToBits(text, file):
-
+def convertToBits(text,file):
+    
     line = text.readline()
     listTEXT = []
-    listTEXT.append(file+'ENDFILE')
+    bitFile = bin(int((file.encode('utf-8')).hex(), 16))[2:]
+    bitEndFile = bin(int(("ENDFILE".encode('utf-8')).hex(), 16))[2:]
     while line:
         listTEXT.append(line)
         line = text.readline()
-    listTEXT.append('ENDTEXT')
     ftext = ''.join(listTEXT)
     bitText = bin(int((ftext.encode('utf-8')).hex(), 16))[2:]
-    return(bitText)
+    bitEndText = bin(int(("ENDTEXT".encode('utf-8')).hex(), 16))[2:]
+    return (bitFile+bitEndFile+bitText+bitEndText)
 
 def convertToString(bin_st): #bin_st est un string du type '0b001011011110'
 
