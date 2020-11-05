@@ -10,14 +10,15 @@ import encodeInBMP
 parser = argparse.ArgumentParser()
 
 parser.add_argument('-v', "--verbose", help="Mode verbeux", action="store_true")
-parser.add_argument('-f', '--file', help="Adresse de l'image à coder", type=str)
+parser.add_argument('-i', '--image', help="Adresse de l'image à coder", type=str)
 parser.add_argument('-o', '--output', help="Adresse de sortie de l'image codée", type=str)
 parser.add_argument('-t', '--text', help='Adresse du texte à coder', type=str)
+parser.add_argument('-f', '--file', help="Nom du fichier une fois décodé.", type=str)
 
 args = parser.parse_args()
 
-if (args.file[-4:].lower() != '.jpg' and args.file[-4:].lower() != '.png' and args.file[-4:].lower() != '.bmp'
-    and args.file[-4:].lower() != '.xmp'):
+if (args.image[-4:].lower() != '.jpg' and args.image[-4:].lower() != '.png' and args.image[-4:].lower() != '.bmp'
+    and args.image[-4:].lower() != '.xmp'):
     print("Erreur : Le fichier d'origine n'est pas une image.")
     sys.exit(1)
 
@@ -30,15 +31,15 @@ if args.text[-4:].lower() != '.txt':
     print("Erreur : le texte doit être au format .txt")
     sys.exit(1)
 
-if not(os.path.exists(args.file), os.path.exists(args.output), os.path.exists(args.text)):
+if not(os.path.exists(args.image), os.path.exists(args.output), os.path.exists(args.text)):
     print("Erreur : un des fichiers spécifiés n'existe pas.")
     sys.exit(1)
 
 if args.verbose:
     print('Ouverture des fichiers...\n')
 
-imgArray = np.array(Image.open(JPGtoBMP.convertToBMP(args.file)))
-output = args.output
+imgArray = np.array(Image.open(JPGtoBMP.convertToBMP(args.image)))
+output = args.file+"ENDFILE"+args.output+"ENDTEXT"
 text = open(args.text, 'r')
 
 if args.verbose:
