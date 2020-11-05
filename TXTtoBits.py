@@ -3,17 +3,14 @@ import codecs
 def convertToBits(text, file):
 
     line = text.readline()
-    listBITS = []
-    listBITS.append(bin(int((file.encode('utf-8')).hex(), 16))[2:])
-    listBITS.append(bin(int(('ENDFILE'.encode('utf-8')).hex(), 16))[2:])
+    listTEXT = []
+    listTEXT.append(file+'ENDFILE')
     while line:
-        lineUTF = line.encode('utf-8')
-        lineHEX = lineUTF.hex()
-        lineBITS = bin(int(lineHEX, 16))[2:]
-        listBITS.append(lineBITS)
+        listTEXT.append(line)
         line = text.readline()
-    bitText = '1010'.join(listBITS)
-    listBITS.append(bin(int(('ENDTEXT'.encode('utf-8')).hex(), 16))[2:])
+    listTEXT.append('ENDTEXT')
+    ftext = ''.join(listTEXT)
+    bitText = bin(int((ftext.encode('utf-8')).hex(), 16))[2:]
     return(bitText)
 
 def convertToString(bin): #bin est un string du type '0b001011011110'
