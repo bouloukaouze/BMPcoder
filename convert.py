@@ -39,13 +39,14 @@ if args.verbose:
     print('Ouverture des fichiers...\n')
 
 imgArray = np.array(Image.open(JPGtoBMP.convertToBMP(args.image)))
-output = args.file+"ENDFILE"+args.output+"ENDTEXT"
+output = args.output
+file = args.file
 text = open(args.text, 'r')
 
 if args.verbose:
     print('Conversion du texte en binaire...\n')
 
-bitText = TXTtoBits.convertToBits(text)
+bitText = TXTtoBits.convertToBits(text, file)
 
 if args.verbose:
     print("Encodage du message dans l'image...\n")
@@ -60,7 +61,6 @@ img = Image.fromarray(imgArray)
 img.save(output)
 
 print("L'image codée a bien été sauvegardée dans le fichier {}".format(output))
-
 sys.exit(0)
 
 
