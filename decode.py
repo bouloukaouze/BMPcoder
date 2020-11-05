@@ -13,9 +13,8 @@ parser.add_argument('-v', '--verbose', help="Mode verbeux", action="store_true")
 parser.add_argument('-i', '--image', help="Address of image to decode", type=str)
 args = parser.parse_args()
 
-if (args.image[-4:].lower() != '.jpg' and args.image[-4:].lower() != '.png'
-    and args.image[-4:].lower() != '.bmp' and args.image[-4:].lower() != '.xmp'):
-    print("Erreur : Le fichier d'origine n'est pas une image.")
+if args.image[-4:].lower() != '.bmp':
+    print("Erreur : Le fichier d'origine n'est pas une image bitmap.")
     sys.exit(1)
     
 if not(os.path.exists(args.image)):
@@ -30,13 +29,14 @@ imgArray = np.array(Image.open(args.image))
 if args.verbose:
     print("Extracting message from image...\n")
 
-bintext=imgToText.gettext(imgArray)
+bintext = imgToText.gettext(imgArray)
+
 if args.verbose:
     print("Converting message to clear text...\n")
     
 
 addr_out, message = splitBin.split(bintext)
-addr_out, message = TXTtoBits.convertToString('0b'+addr_out), TXTtoBits.convertToString('0b'+message)
+addr_out, message = TXTtoBits.convertToString(addr_out), TXTtoBits.convertToString(message)
 
 out_file = open(addr_out, 'w')
 out_file.write(message)

@@ -4,10 +4,11 @@ def gettext(img):
     Takes image with encoded message and returns binary text
     """
     
-    message=""
+    message = ""
     
     for line in img:
         for pixel in line:
             for value in pixel:
-                message+=str(bin(int(value))[-1])
+                message += str(bin(int(value))[-1])
+
     return message

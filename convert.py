@@ -22,9 +22,8 @@ if (args.image[-4:].lower() != '.jpg' and args.image[-4:].lower() != '.png' and 
     print("Erreur : Le fichier d'origine n'est pas une image.")
     sys.exit(1)
 
-if (args.output[-4:].lower() != '.jpg' and args.output[-4:].lower() != '.png' and args.output[-4:].lower() != '.bmp'
-    and args.output[-4:].lower() != '.xmp'):
-    print("Erreur : Le fichier de sortie n'est pas une image.")
+if args.output[-4:].lower() != '.bmp':
+    print("Erreur : Le fichier de sortie n'est pas une image bitmap.")
     sys.exit(1)
 
 if args.text[-4:].lower() != '.txt':
