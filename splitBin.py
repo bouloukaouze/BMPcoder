@@ -14,5 +14,7 @@ def split(bintext):
             addr_out+=i
         else:
             message+=i
+            if keyword=="ENDTEXT":
+                return addr_out, message
     
     return addr_out, message
