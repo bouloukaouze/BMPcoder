@@ -1,4 +1,3 @@
-import JPGtoBMP
 import argparse
 import sys
 import os
@@ -9,57 +8,55 @@ import encodeInBMP
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('-v', "--verbose", help="Mode verbeux", action="store_true")
-parser.add_argument('-i', '--image', help="Adresse de l'image à coder", type=str)
-parser.add_argument('-o', '--output', help="Adresse de sortie de l'image codée", type=str)
-parser.add_argument('-t', '--text', help='Adresse du texte à coder', type=str)
-parser.add_argument('-f', '--file', help="Nom du fichier une fois décodé.", type=str)
+parser.add_argument('-v', "--verbose", help="Verbose mode", action="store_true")
+parser.add_argument('-i', '--image', help="Address of the image to code", type=str)
+parser.add_argument('-o', '--output', help="Output address of the encoded image", type=str)
+parser.add_argument('-t', '--text', help='Address of the text to code', type=str)
+parser.add_argument('-f', '--file', help="Address of the file once decodec", type=str)
 
 args = parser.parse_args()
 
 if (args.image[-4:].lower() != '.jpg' and args.image[-4:].lower() != '.png' and args.image[-4:].lower() != '.bmp'
     and args.image[-4:].lower() != '.xmp'):
-    print("Erreur : Le fichier d'origine n'est pas une image.")
+    print("Error : Origin file is not an image.")
     sys.exit(1)
 
 if args.output[-4:].lower() != '.bmp':
-    print("Erreur : Le fichier de sortie n'est pas une image bitmap.")
+    print("Error : Output file is not a bitmap image.")
     sys.exit(1)
 
 if args.text[-4:].lower() != '.txt':
-    print("Erreur : le texte doit être au format .txt")
+    print("Error : text has to be at .txt format.")
     sys.exit(1)
 
 if not(os.path.exists(args.image), os.path.exists(args.output), os.path.exists(args.text)):
-    print("Erreur : un des fichiers spécifiés n'existe pas.")
+    print("Error : One of the specified files does not exist.")
     sys.exit(1)
 
 if args.verbose:
-    print('Ouverture des fichiers...\n')
+    print('Opening files...\n')
 
-imgArray = np.array(Image.open(JPGtoBMP.convertToBMP(args.image)))
+imgArray = np.array(Image.open(args.image))
 output = args.output
 file = args.file
 text = open(args.text, 'r')
 
 if args.verbose:
-    print('Conversion du texte en binaire...\n')
+    print('Converting text to binary...\n')
 
 bitText = TXTtoBits.convertToBits(text, file)
 
 if args.verbose:
-    print("Encodage du message dans l'image...\n")
+    print("Coding the message in the image...\n")
 
 imgArray = encodeInBMP.encode(imgArray, bitText)
 
 if args.verbose:
-    print("Sauvegarde de l'image...\n")
+    print("Saving the image...\n")
 
 img = Image.fromarray(imgArray)
 
 img.save(output)
 
-print("L'image codée a bien été sauvegardée dans le fichier {}".format(output))
+print("Encoded image has been saved in the following file : {} !".format(output))
 sys.exit(0)
-
-

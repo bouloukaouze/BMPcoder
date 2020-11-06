@@ -38,6 +38,12 @@ if args.verbose:
 addr_out, message = splitBin.split(bintext)
 addr_out, message = TXTtoBits.convertToString(addr_out), TXTtoBits.convertToString(message)
 
+if args.verbose:
+    print("Writing text on %s...\n" % addr_out)
+
 out_file = open(addr_out, 'w')
 out_file.write(message)
 out_file.close()
+
+print('Done !')
+sys.exit(0)

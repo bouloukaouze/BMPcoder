@@ -1,6 +1,4 @@
 def split(bintext):
-
-    print('début')
     
     keyword = "1000101010011100100010001000110010010010100110001000110" # random binary word
     addr_out = ""
@@ -8,7 +6,7 @@ def split(bintext):
     
     dest = True
     
-    for i in bintext[2:]:
+    for i in bintext:
         keyword = keyword[1:]+i
         if dest:
             addr_out += i

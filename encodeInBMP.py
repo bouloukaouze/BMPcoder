@@ -13,11 +13,3 @@ def encode(img, bitText): #img est de type np.array
                     bitText = ''.join(listBit[1:])
                 except:
                     return img
-
-
-
-
-
-
-
-
