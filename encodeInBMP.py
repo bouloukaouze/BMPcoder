@@ -1,24 +1,16 @@
 def encode(img, bitText): #img est de type np.array
 
-    listBitText = list(str(bitText))
-    listValues = []
     for line in img:
         for pixel in line:
-            for value in pixel:
-                value = bin(int(value))[2:]
-                listValues.append(value)
-
-    for i in range(len(listBitText)):
-        l = list(str(listValues[i]))
-        l[-1] = str(listBitText[i])
-        listValues[i] = int(''.join(l))
-
-    for line in img:
-        for pixel in line:
-            for value in pixel:
+            for i in range(len(pixel)):
                 try:
-                    value = int(listValues[0], 2)
-                    del(listValues[0])
+                    value = bin(int(pixel[i]))[2:]
+                    listBit = list(bitText)
+                    listVal = list(value)
+                    listVal[-1] = listBit[0]
+                    value = int(''.join(listVal), 2)
+                    pixel[i] = value
+                    bitText = ''.join(listBit[1:])
                 except:
                     return img
 

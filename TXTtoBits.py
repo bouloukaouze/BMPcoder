@@ -17,6 +17,7 @@ def convertToBits(text,file):
 def convertToString(bin_st): #bin_st est un string du type '001011011110'
 
     hexa = hex(int(bin_st[2:], 2))
+    print(hexa)
     text = codecs.decode(hexa, 'hex').decode('utf-8')
     return(text)
 
