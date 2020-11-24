@@ -1,22 +1,34 @@
-def split(bintext):
+def getNumber(bintext):
+
+    return(int(bintext[:8], 2))
+
+def split(bintext, number):
+
+    addr_out_list = []
+    message_list = []
+
+    for k in range(number):
+        keyword = "1000101010011100100010001000110010010010100110001000110" # random binary word
+        addr_out = ""
+        message = ""
     
-    keyword = "1000101010011100100010001000110010010010100110001000110" # random binary word
-    addr_out = ""
-    message = ""
+        dest = True
+
+        count = -1
+        for i in bintext:
+            count += 1
+            keyword = keyword[1:]+i
+            if dest:
+                addr_out += i
+                if keyword == "1000101010011100100010001000110010010010100110001000101": # binary ENDFILE
+                    dest = False
+                    addr_out_list.append(addr_out[:-55]) # on vire les bits de ENDFILE
+            else:
+                message += i
+                if keyword == "1000101010011100100010001010100010001010101100001010100": # binary ENDTEXT
+                    message_list.append(message[:-55]) # on vire les bits de ENDTEXT
+                    bintext = bintext[count:]
+                    break
+
     
-    dest = True
-    
-    for i in bintext:
-        keyword = keyword[1:]+i
-        if dest:
-            addr_out += i
-            if keyword == "1000101010011100100010001000110010010010100110001000101": # binary ENDFILE
-                dest = False
-                addr_out = addr_out[:-55] # on vire les bits de ENDFILE
-        else:
-            message += i
-            if keyword == "1000101010011100100010001010100010001010101100001010100": # binary ENDTEXT
-                message = message[:-55] # on vire les bits de ENDTEXT
-                return addr_out, message
-    
-    return addr_out, message
+    return addr_out_list, message_list

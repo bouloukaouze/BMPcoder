@@ -1,4 +1,5 @@
 def gettext(img):
+
     """
     Takes image with encoded message and returns binary text
     """

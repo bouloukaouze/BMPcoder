@@ -1,18 +1,24 @@
 import codecs
 
-def convertToBits(text,file):
-    
-    line = text.readline()
-    listTEXT = []
-    bitFile = bin(int((file.encode('utf-8')).hex(), 16))[2:]
-    bitEndFile = bin(int(("ENDFILE".encode('utf-8')).hex(), 16))[2:]
-    while line:
-        listTEXT.append(line)
+def convertToBits(textlist,filelist):
+
+    bitNumber = bin(len(textlist))[2:].zfill(8)
+    bitList = [bitNumber]
+    for i in range(len(textlist)):
+        text = open(textlist[i], 'r')
         line = text.readline()
-    ftext = ''.join(listTEXT)
-    bitText = bin(int((ftext.encode('utf-8')).hex(), 16))[2:]
-    bitEndText = bin(int(("ENDTEXT".encode('utf-8')).hex(), 16))[2:]
-    return (bitFile+bitEndFile+bitText+bitEndText)
+        listTEXT = []
+        bitFile = bin(int((filelist[i].encode('utf-8')).hex(), 16))[2:]
+        bitEndFile = bin(int(("ENDFILE".encode('utf-8')).hex(), 16))[2:]
+        while line:
+            listTEXT.append(line)
+            line = text.readline()
+        ftext = ''.join(listTEXT)
+        bitText = bin(int((ftext.encode('utf-8')).hex(), 16))[2:]
+        bitEndText = bin(int(("ENDTEXT".encode('utf-8')).hex(), 16))[2:]
+        bitList.append(bitFile+bitEndFile+bitText+bitEndText)
+    return (''.join(bitList))
+
 
 def convertToString(bin_st): #bin_st est un string du type '001011011110'
 
