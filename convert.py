@@ -46,7 +46,6 @@ text = args.text
 textlist = text.split(',')
 filelist = file.split(',')
 
-
 if len(textlist) != number or len(filelist) != number:
     print("Error : The number of texts and/or the number of output file is not equal to number.")
     sys.exit(1)

@@ -8,7 +8,7 @@ def split(bintext, number):
     message_list = []
 
     for k in range(number):
-        keyword = "1000101010011100100010001000110010010010100110001000110"
+        keyword = "0000101010011100100010001001110010010010100110001000110"
         addr_out = ""
         message = ""
     
