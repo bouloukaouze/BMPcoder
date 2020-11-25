@@ -1,4 +1,4 @@
-def encode(img, bitText): #img est de type np.array.
+def encode(img, bitText):
 
     for line in img:
         for pixel in line:

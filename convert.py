@@ -9,11 +9,11 @@ import encodeInBMP
 parser = argparse.ArgumentParser()
 
 parser.add_argument('-v', "--verbose", help="Verbose mode", action="store_true")
-parser.add_argument('-n', '--number', help="Number of files to code", type=int)
+parser.add_argument('-n', '--number', help="Number of files to code", default=1, type=int)
 parser.add_argument('-i', '--image', help="Address of the image to code", type=str)
-parser.add_argument('-o', '--output', help="Output address of the encoded image", type=str)
+parser.add_argument('-o', '--output', help="Output address of the encoded image", default='output_image.bmp', type=str)
 parser.add_argument('-t', '--text', help='Address of the text to code', type=str)
-parser.add_argument('-f', '--file', help="Address of the file once decodec", type=str)
+parser.add_argument('-f', '--file', help="Address of the file once decodec", default='output_text.txt', type=str)
 
 args = parser.parse_args()
 
@@ -65,6 +65,9 @@ if args.verbose:
     print('Converting text to binary...\n')
 
 bitText = TXTtoBits.convertToBits(textlist, filelist)
+
+if args.verbose:
+    print('Text converted ! Total binary text size : '+str(len(bitText))+' bits.\n')
 
 if args.verbose:
     print("Coding the message in the image...\n")

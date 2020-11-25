@@ -17,6 +17,7 @@ def convertToBits(textlist,filelist):
         bitText = bin(int((ftext.encode('utf-8')).hex(), 16))[2:]
         bitEndText = bin(int(("ENDTEXT".encode('utf-8')).hex(), 16))[2:]
         bitList.append(bitFile+bitEndFile+bitText+bitEndText)
+        bitList.insert(0, bin(int(str(len(''.join(bitList)) + 64)))[2:].zfill(64))
     return (''.join(bitList))
 
 

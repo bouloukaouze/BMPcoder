@@ -29,11 +29,11 @@ imgArray = np.array(Image.open(args.image))
 if args.verbose:
     print("Extracting message from image...\n")
 
-bintext = imgToText.gettext(imgArray)
+bintext = imgToText.gettext(imgArray, args.verbose)[64:]
 
 if args.verbose:
     print("Converting message to clear text...\n")
-    
+
 
 addr_out_list, message_list = splitBin.split(bintext[8:], splitBin.getNumber(bintext))
 
